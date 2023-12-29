@@ -1,0 +1,41 @@
+Scratch-AI-Extension(function (ext) {
+    var conversationStarted = false;
+    var userQuestion = "";
+    var aiResponse = "";
+
+    // Trigger a conversation when the "start conversation" block is used
+    ext.startConversation = function () {
+        conversationStarted = true;
+        // You can initialize any necessary variables here
+    };
+
+    // Attach this block to an "ask" block to get an AI response
+    ext.getAiResponse = function () {
+        if (conversationStarted) {
+            // Use userQuestion to generate an AI response
+            // Replace the following line with your AI logic
+            aiResponse = "I'm a simple AI. You asked: " + userQuestion;
+            return aiResponse;
+        } else {
+            return "Use 'Start Conversation' block first.";
+        }
+    };
+
+    // Set the user's question
+    ext.setUserQuestion = function (question) {
+        userQuestion = question;
+    };
+
+    // Block and block menu descriptions
+    var descriptor = {
+        blocks: [
+            [' ', 'Start Conversation', 'startConversation'],
+            ['r', 'Get AI Response', 'getAiResponse'],
+            [' ', 'Set User Question to %s', 'setUserQuestion', 'What is your name?']
+        ],
+        menus: {},
+    };
+
+    // Register the extension
+    ScratchExtensions.register('AI Conversation Extension', descriptor, ext);
+})({});
